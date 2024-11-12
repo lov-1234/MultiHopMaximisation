@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 
+
 class BaseSolver:
-    def __init__(self, graph):
+    def __init__(self, graph: nx.Graph):
         self.g = graph
 
     def solve(self):
