@@ -7,10 +7,10 @@ class BaseSolver:
         self.g = graph
 
     def solve(self):
-        '''
+        """
         To Be overridden
         :return: None
-        '''
+        """
         pass
 
     def visualise_graph(self):

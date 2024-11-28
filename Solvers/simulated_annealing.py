@@ -4,8 +4,8 @@ import numpy as np
 
 
 class SimulatedAnnealing(BaseSolver):
-
     EPS = 1e-3
+
     def __init__(self, graph: nx.Graph, initial_temperature, num_d, num_k, cooling_rate, max_iters):
         super().__init__(graph)
         self.temp = initial_temperature
@@ -13,7 +13,6 @@ class SimulatedAnnealing(BaseSolver):
         self.num_k = num_k
         self.cooling_rate = cooling_rate
         self.max_iters = max_iters
-
 
     def calculate_fitness(self, candidates):
         nodes_influenced = set(candidates)  # initially only the seed nodes are influenced, a set used because a node
@@ -39,12 +38,12 @@ class SimulatedAnnealing(BaseSolver):
         return neighbour
 
     def update_temperature(self, iteration):
-        self.temp = self.temp * self.cooling_rate**(iteration + 1)
+        self.temp = self.temp * self.cooling_rate ** (iteration + 1)
 
     def acceptance_probability(self, neighbour, current):
         if self.calculate_fitness(neighbour) > self.calculate_fitness(current):
             return 1.
-        return np.exp((self.calculate_fitness(neighbour) - self.calculate_fitness(current))/self.temp)
+        return np.exp((self.calculate_fitness(neighbour) - self.calculate_fitness(current)) / self.temp)
 
     def solve(self):
         current_solution = self.create_initial_solution()
@@ -68,3 +67,5 @@ class SimulatedAnnealing(BaseSolver):
         return best_sol
 
 
+if __name__ == '__main__':
+    pass

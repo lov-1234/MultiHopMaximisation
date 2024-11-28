@@ -3,6 +3,7 @@ import numpy as np
 import random
 from base_solver import BaseSolver
 
+
 class GeneticAlgorithmSolver(BaseSolver):
 
     def __init__(self, graph: nx.Graph, num_k: int, num_d: int, num_subset_for_selection: int, mutation_rate: float,
@@ -11,7 +12,7 @@ class GeneticAlgorithmSolver(BaseSolver):
         # self.g = graph
         self.k = num_k  # Number of k influential nodes
         self.num_d = num_d  # max number of hops permitted
-        self.num_sub = num_subset_for_selection     # Subset of the nodes for selection from the population
+        self.num_sub = num_subset_for_selection  # Subset of the nodes for selection from the population
         self.mutation_rate = mutation_rate
         self.num_generations = num_generations
         self.population_size = population_size
@@ -54,7 +55,7 @@ class GeneticAlgorithmSolver(BaseSolver):
         return offspring
 
     def mutate(self, candidate):
-        num_genes_mutated = int(len(candidate)*self.mutation_rate)   # Given a mutation rate, these many genes in a
+        num_genes_mutated = int(len(candidate) * self.mutation_rate)  # Given a mutation rate, these many genes in a
         # node will have to be mutated. that is if k = 10, and mutation rate is .3 then 3 nodes will be mutated
         random_idx = np.random.randint(len(candidate), size=num_genes_mutated)
         for i in random_idx:
@@ -92,7 +93,8 @@ class GeneticAlgorithmSolver(BaseSolver):
 
 if __name__ == '__main__':
     # g = nx.erdos_renyi_graph(200, 0.05)
-    g = nx.barabasi_albert_graph(200, 4)
-    solver = GeneticAlgorithmSolver(g, 2, 3, 4, .3, 100, 20)
-    best_sol = solver.solve()
-
+    g = nx.barabasi_albert_graph(1000, 4).to_directed()
+    for _ in range(10):
+        solver = GeneticAlgorithmSolver(g, 2, 3, 4, .1, 100, 20)
+        best_sol = solver.solve()
+        print(best_sol)
